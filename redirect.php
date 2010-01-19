@@ -15,6 +15,7 @@ $db = mysql_connect($db_host, $db_user, $db_pass) or die ('Could not connect to 
 mysql_select_db($db_name) or die('Could not select database');
 
 $path = dirname($_SERVER['PHP_SELF']);
+$path = ($path == '/') ? '' : $path;
 $key = mysql_real_escape_string(str_replace($path.'/', '', $_SERVER['REQUEST_URI']));
 
 // key is a MySQL reserved word
