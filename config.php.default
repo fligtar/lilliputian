@@ -1,0 +1,14 @@
+<?php
+/**
+ * Change the values below to match your database and select a password
+ */
+
+$db_host = 'localhost';
+$db_user = '';
+$db_pass = '';
+$db_name = '';
+
+// The admin password is used to create new URLs and view stats
+$admin_password = '';
+
+?>

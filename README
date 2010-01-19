@@ -1,0 +1,11 @@
+lilliputian is a dead simple URL shortener that redirects all URLs in its directory.
+
+Installation:
+1. Create a database
+2. Run the SQL in lilliuptian.sql to create the table
+3. Copy config.php.default to config.php
+4. Fill in the values in config.php
+
+That's it!
+
+NOTE: the only current functionality is redirecting to URLs that are manually entered into the database. Creation from the web and viewing stats will be coming soon.
