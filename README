@@ -8,4 +8,13 @@ Installation:
 
 That's it!
 
-NOTE: the only current functionality is redirecting to URLs that are manually entered into the database. Creation from the web and viewing stats will be coming soon.
+Usage:
+1. Navigate to manage.php in your installation.
+2. Enter the password you stored in $admin_password in config.php
+3. You can now create, manage, and view stats for lilliputs from this page
+4. There's also a bookmarklet that will shorten the current URL
+
+TODO:
+* automatic key generation for when you don't want to name it
+* stylesheet
+* edit and delete lilliputs
