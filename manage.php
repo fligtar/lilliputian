@@ -7,6 +7,13 @@
 
 require 'init.php';
 
+session_start();
+
+// Check if the user is trying to log in
+if (!empty($_POST['password']) && $_POST['password'] == $admin_password) {
+    $_SESSION['authenticated'] = true;
+}
+
 // Base URL
 $base_url = 'http'.($_SERVER['SERVER_PORT'] == 443 ? 's' : '').'://'.$_SERVER['SERVER_NAME'].$path;
 ?>
@@ -21,6 +28,20 @@ $base_url = 'http'.($_SERVER['SERVER_PORT'] == 443 ? 's' : '').'://'.$_SERVER['S
 <h1>lilliputian management</h1>
 
 <?php
+// If not logged in, show the form and exit
+if (empty($_SESSION['authenticated'])) {
+?>
+    <form method="post">
+        <label for="password">password:</label> <input type="password" name="password" id="password" />
+        <input type="submit" value="log in" />
+    </form>
+    
+    </body>
+    </html>
+<?php
+    exit;
+}
+
 // Check if any actions need to be handled
 if (isset($_GET['action'])) {
     
@@ -39,6 +60,13 @@ if (isset($_GET['action'])) {
             
             echo '<h3 style="color: green;">created <a href="'.htmlentities($base_url.'/'.$_GET['key']).'">'.htmlentities($base_url.'/'.$_GET['key']).'</a></h3>';
         }
+    }
+    
+    if ($_GET['action'] == 'logout') {
+        $_SESSION = array();
+        session_destroy();
+        // Not my finest work!
+        die('<p>Logged out. <a href="'.$base_url.'/manage.php">Log back in?</a></p></body></html>');
     }
 }
 ?>
@@ -89,6 +117,7 @@ if (mysql_num_rows($items_qry) > 0) {
 <?php } ?>
 
 <p>bookmarklet: <a href="javascript:var%20k=window.prompt('key?');window.open('<?php echo $base_url; ?>/manage.php?action=create&amp;key='+k+'&amp;url='+document.location.href);void(0);">lilliput it</a></p>
+<p><a href="manage.php?action=logout">log out</a></p>
 
 </body>
 </html>
